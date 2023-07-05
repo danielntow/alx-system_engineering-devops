@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -ap1 | awk '{printf "%s, ", $0} END {print ""}' | sed 's/\.\//.\//' | sed 's/,$/\n/'
+ls -a1 | sort -df | awk '{ORS=NR%2?", ":"\n"; print}'
