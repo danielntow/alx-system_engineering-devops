@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -a1 | sort -df | awk '{ORS=NR%2?", ":"\n"; print}'
+ls -a | sed 's/\./, ./g' | sed 's/\/$//' | sort -n | sed '1i./, ../'
