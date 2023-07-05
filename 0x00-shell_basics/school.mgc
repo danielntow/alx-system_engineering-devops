@@ -1,2 +1,2 @@
-0	string	SCHOOL	School data file
->2	belong	0x0	magic\n
+0       string  SCHOOL  School data file
+file -m school.mgc your_file
