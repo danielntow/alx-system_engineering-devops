@@ -1,2 +1,4 @@
 0 string SCHOOL SCHOOL data
-file -C -m school.mgc
+for file in *; do
+    file -m school.mgc "$file"
+done
