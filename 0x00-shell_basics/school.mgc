@@ -1,4 +1,2 @@
-0 string SCHOOL SCHOOL data
-for file in *; do
-    file -m school.mgc "$file"
-done
+#!/bin/bash
+0 string SCHOOL School data
