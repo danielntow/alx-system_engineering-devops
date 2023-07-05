@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -A | sort -d -f -t. -k1.1,1.1n -k1.2
+(printf "./, ../"; ls -A | sort -d -f -t. -k1.1,1.1n -k1.2) | paste -sd ", "
