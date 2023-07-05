@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -m
+ls -p1a | LC_COLLATE=C grep -E '^[0-9A-Za-z]' | sort -d | tr '\n' ',' | sed 's/,$/\n/'
