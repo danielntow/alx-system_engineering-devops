@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -a | sed 's/\./, ./g' | sed 's/\/$//' | sort -n | sed '1i./, ../'
+ls -pam
