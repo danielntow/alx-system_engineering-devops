@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -pam
+ls -ap1 | grep -v "/$" | sort -d -f -t/ -k1.1,1.1n -k1.2,1.2 | tr '\n' ',' && echo
