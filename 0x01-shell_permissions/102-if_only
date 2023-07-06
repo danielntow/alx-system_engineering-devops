@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo if [ $(stat -c %U hello) = "guillaume" ] else chown betty hello fi
+sudo if [ $(stat -c %U hello) = "guillaume" ] chown betty hello else chown betty hello fi
