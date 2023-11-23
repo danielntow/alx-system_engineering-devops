@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# Display all files in a list format
+# Displaying content of the current directory in a list format
 for file in *; do
-    if [ -f "$file" ]; then
-        echo "$file"
+    if [ -f "$file" ] && [[ "$file" != .* ]]; then  # Check if it's a file and not hidden
+        filename="${file#*-}"  # Extract part of the name after the first dash
+        echo "$filename"
     fi
 done
