@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+#loop 10 times
 counter=0
 until [ $counter -eq 10 ]
 do
