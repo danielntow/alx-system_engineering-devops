@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-#display all files in a list format
+# Display all files in a list format
 for file in *; do
-  if [ -f "$file" ]; then  # Check if it's a file (not a directory)
+    if [ -f "$file" ]; then
         echo "$file"
     fi
 done
