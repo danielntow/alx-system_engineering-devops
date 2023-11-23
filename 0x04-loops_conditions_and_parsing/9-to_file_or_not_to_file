@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#checks info about scool file
+file="school"
+
+[ -e "$file" ] && echo "school file exists" ||
+    { echo "school file does not exist"; exit; }
+
+[ -s "$file" ] && echo "school file is not empty" || echo "school file is empty"
+
+[ -f "$file" ] && echo "school is a regular file" || echo "school is not a regular file"
