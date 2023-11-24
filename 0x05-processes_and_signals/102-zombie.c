@@ -13,7 +13,7 @@ int infinite_while(void)
     return (0);
 }
 
-int main()
+int main(void)
 {
     pid_t child_pid;
     int i;
@@ -42,5 +42,5 @@ int main()
     /* Keep the parent process running indefinitely*/
     infinite_while();
 
-    return 0;
+    return (0);
 }
