@@ -1,0 +1,5 @@
+Host 6311e1fae5e6.d439842f.alx-cod.online
+  HostName 6311e1fae5e6.d439842f.alx-cod.online
+  User 6311e1fae5e6
+  IdentityFile ~/.ssh/school
+  PasswordAuthentication no
