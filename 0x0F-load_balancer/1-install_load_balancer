@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# configures a brand new ubuntu machine and installs haproxy
+sudo apt-get update
+sudo apt-get -y install --no-install-recommends software-properties-common
+sudo add-apt-repository -y ppa:vbernat/haproxy-2.6
+sudo apt-get install -y haproxy=2.6.\*
+sudo echo -e "frontend holberton\n\
+     bind *:80\n\
+     mode http\n\
+     default_backend servers_hol\n\n\
+backend servers_hol\n\
+	balance roundrobin\n\
+	mode http\n\
+	server 38731-web-01 34.232.70.87:80\n\
+	server 38731-web-02 35.153.16.39:80" | sudo tee -a /etc/haproxy/haproxy.cfg >/dev/null
+if [ "$(pgrep -c haproxy)" -le 0 ]; then
+    sudo service haproxy start
+else
+    sudo service haproxy restart
+fi
