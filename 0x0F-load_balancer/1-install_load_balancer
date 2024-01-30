@@ -11,8 +11,8 @@ sudo echo -e "frontend holberton\n\
 backend servers_hol\n\
 	balance roundrobin\n\
 	mode http\n\
-	server 38731-web-01 34.232.70.87:80\n\
-	server 38731-web-02 35.153.16.39:80" | sudo tee -a /etc/haproxy/haproxy.cfg >/dev/null
+	server 38731-web-01 35.175.130.55\n\
+	server 38731-web-02 34.234.193.247:80" | sudo tee -a /etc/haproxy/haproxy.cfg >/dev/null
 if [ "$(pgrep -c haproxy)" -le 0 ]; then
     sudo service haproxy start
 else
