@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
+#made short
 
 apt-get update
 apt-get install -y nginx
 echo "server { listen 80; server_name localhost; location / { root /usr/share/nginx/html; index index.html index.htm; } }" >/etc/nginx/sites-available/default
-service nginx reload
+nginx -s reload
+service nginx status
