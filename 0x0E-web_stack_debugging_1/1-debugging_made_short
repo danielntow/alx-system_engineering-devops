@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-#made short
-
-apt-get update
-apt-get install -y nginx
-echo "server { listen 80; server_name localhost; location / { root /usr/share/nginx/html; index index.html index.htm; } }" >/etc/nginx/sites-available/default
-nginx -s reload
-service nginx status
+#find out what’s keeping your Ubuntu container’s Nginx
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+pgrep nginx | xargs kill -1
