@@ -1,37 +1,20 @@
 #!/usr/bin/env bash
-# Function to display information about a subdomain
+# write a Bash script that will display information about subdomains.
+domain=$1
+SUBDOMAINS="www lb-01 web-01 web-02"
 
-display_info() {
-    local sub_domain=$1
-    local domain=$2
-    local record_type=$(dig "$sub_domain.$domain" +short | awk '{print toupper($1)}')
-    local destination=$(dig "$sub_domain.$domain" +short)
-
-    echo "The subdomain $sub_domain is a $record_type record and points to $destination"
+function show_all() {
+    for arg in $SUBDOMAINS
+    do
+        echo -n "The subdomain $arg is a "
+        dig "$arg"."$domain" | grep -A1 'ANSWER SECTION:' | tail -n1 | awk '{print $4 " record and points to " $5}'
+    done
 }
 
-# Main script
-main() {
-    local domain=$1
-    local sub_domain=$2
-
-    if [ -z "$sub_domain" ]; then
-        # Display information for default subdomains
-        display_info "www" "$domain"
-        display_info "lb-01" "$domain"
-        display_info "web-01" "$domain"
-        display_info "web-02" "$domain"
-    else
-        # Display information for the specified subdomain
-        display_info "$sub_domain" "$domain"
-    fi
-}
-
-# Check if the correct number of arguments is provided
-if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
-    echo "Usage: $0 <domain> [subdomain]"
-    exit 1
+if [ $# -eq 2 ]
+then
+    echo -n "The subdomain $2 is a "
+    dig "$2"."$domain" | grep -A1 'ANSWER SECTION:' | tail -n1 | awk '{print $4 " record and points to " $5}'
+else
+    show_all
 fi
-
-# Execute the main script
-main "$1" "$2"
