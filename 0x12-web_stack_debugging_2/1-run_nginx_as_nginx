@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Update Nginx configuration to run as nginx user
+sed -i 's/user\s*nginx;/user nginx;/' /etc/nginx/nginx.conf
+
+# Restart Nginx to apply changes
+service nginx restart
+
+# Check Nginx processes
+ps auxff | grep "nginx"
+
+# Check if Nginx is listening on port 8080
+nc -z 0 8080
