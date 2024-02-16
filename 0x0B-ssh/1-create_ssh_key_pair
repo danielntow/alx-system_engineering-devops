@@ -1,11 +1,2 @@
 #!/usr/bin/env bash
-# This script generates an RSA key pair with specific requirements
-
-# Define the key file path
-key_path=~/.ssh/school
-
-# Generate RSA key pair with 4096 bits and passphrase protection
-ssh-keygen -t rsa -b 4096 -f "$key_path" -N "betty"
-
-# Output success message
-echo "RSA key pair successfully created at $key_path"
+ssh-keygen -t rsa -b 4096 -P betty -f school

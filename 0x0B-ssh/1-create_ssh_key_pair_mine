@@ -1,0 +1,30 @@
+# !/usr/bin/env bash
+# # This script generates an RSA key pair with specific requirements
+
+# # Define the key file path
+# key_path=~/.ssh/school
+
+# # Create the ~/.ssh directory if it doesn't exist
+# mkdir -p ~/.ssh
+
+# # Generate RSA key pair with 4096 bits and passphrase protection
+# ssh-keygen -t rsa -b 4096 -f "$key_path" -N betty
+
+# # Output success message
+# echo "RSA key pair successfully created at $key_path"
+
+# This script generates an RSA key pair with specific requirements
+
+# Define the key file names
+private_key="school"
+public_key="$private_key.pub"
+
+# Generate RSA key pair with 4096 bits and passphrase protection
+ssh-keygen -t rsa -b 4096 -f "$private_key" -N "betty"
+
+# Output success message
+echo "RSA key pair successfully created."
+
+# Display key information
+ssh-keygen -lf "$private_key"
+ls -l "$private_key" "$public_key"
