@@ -36,11 +36,11 @@ if __name__ == "__main__":
                     [employee_id, employee_name, str(
                         task['completed']), task['title']])
 
-        print("CSV file '{}' has been created.".format(csv_filename))
+        # print("CSV file '{}' has been created.".format(csv_filename))
         # Provide feedback about the number of tasks
-        print("Number of tasks in CSV: OK")
+        # print("Number of tasks in CSV: OK")
         # Provide feedback about the user ID and username
-        print("User ID and Username: OK")
+        # print("User ID and Username: OK")
 
     except requests.exceptions.RequestException as e:
         print("Error:", e)
