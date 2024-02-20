@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-This script retrieves and exports information about an employee's TODO list progress in CSV format using a REST API.
+This script retrieves and exports information about an employee's
+TODO list progress in CSV format using a REST API.
 """
 
 import csv
@@ -32,7 +33,8 @@ if __name__ == "__main__":
 
             for task in tasks_response:
                 csv_writer.writerow(
-                    [employee_id, employee_name, str(task['completed']), task['title']])
+                    [employee_id, employee_name, str(
+                        task['completed']), task['title']])
 
         print("CSV file '{}' has been created.".format(csv_filename))
         # Provide feedback about the number of tasks
