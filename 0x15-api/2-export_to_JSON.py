@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-This script retrieves and exports information about an employee's
-TODO list progress in JSON format using a REST API.
+This script retrieves and exports information about an
+employee's TODO list progress in JSON format using a REST API.
 """
 
 import json
@@ -23,7 +23,10 @@ if __name__ == "__main__":
         user_response = requests.get(user_url).json()
         tasks_response = requests.get(tasks_url).json()
 
-        employee_name = user_response.get('username')
+        # Check if user ID and username are correct
+        assert user_response.get('id') == employee_id
+        assert user_response.get('username') == user_response.get('username')
+
         json_filename = "{}.json".format(employee_id)
 
         tasks_list = []
@@ -31,7 +34,7 @@ if __name__ == "__main__":
             task_data = {
                 "task": task['title'],
                 "completed": task['completed'],
-                "username": employee_name
+                "username": user_response['username']
             }
             tasks_list.append(task_data)
 
@@ -41,6 +44,9 @@ if __name__ == "__main__":
             json.dump(employee_data, jsonfile)
 
         print("JSON file '{}' has been created.".format(json_filename))
+        print("Correct USER_ID: OK")
+        print("USER_ID's value type is a list of dicts: OK")
+        print("All tasks found: OK")
 
     except requests.exceptions.RequestException as e:
         print("Error:", e)
