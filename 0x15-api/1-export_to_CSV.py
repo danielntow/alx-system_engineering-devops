@@ -1,22 +1,34 @@
 #!/usr/bin/python3
-"""gather data from an API"""
+"""
+Gather data from an API and export to CSV
+"""
+
 import csv
 import json
 import requests
 from sys import argv
 
-emp_info = 'https://jsonplaceholder.typicode.com/users/'
-all_todos = 'https://jsonplaceholder.typicode.com/todos'
-if __name__ == "__main__":
-    emp_id = argv[1]
-    get_emp_info = json.loads(requests.get(emp_info + emp_id).text)
-    get_all_todos = json.loads(requests.get(all_todos).text)
-    todos_done_list = []
-    name = None
+EMP_INFO_URL = 'https://jsonplaceholder.typicode.com/users/'
+ALL_TODOS_URL = 'https://jsonplaceholder.typicode.com/todos'
 
-    with open('{}.csv'.format(emp_id), 'w', encoding="utf8") as f:
-        for i in get_all_todos:
-            if i['userId'] == int(emp_id):
-                f.write('"{}","{}","{}","{}"\n'.format(
-                    emp_id, get_emp_info['username'],
-                    i['completed'], i['title']))
+if __name__ == "__main__":
+    if len(argv) != 2 or not argv[1].isdigit():
+        print("Usage: {} <employee_id>".format(argv[0]))
+        exit(1)
+
+    emp_id = argv[1]
+    emp_info_response = requests.get(EMP_INFO_URL + emp_id).json()
+    all_todos_response = requests.get(ALL_TODOS_URL).json()
+
+    todos_done_list = []
+    with open('{}.csv'.format(emp_id), 'w', encoding="utf8", newline='') as csvfile:
+        csv_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
+        csv_writer.writerow(
+            ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+
+        for todo in all_todos_response:
+            if todo['userId'] == int(emp_id):
+                csv_writer.writerow(
+                    [emp_id, emp_info_response['username'], str(todo['completed']), todo['title']])
+
+    print("CSV file '{}.csv' has been created.".format(emp_id))
