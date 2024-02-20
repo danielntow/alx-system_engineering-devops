@@ -9,9 +9,9 @@ from sys import argv
 import requests
 
 if __name__ == "__main__":
-    if len(argv) != 2 or not argv[1].isdigit():
-        print("Usage: {} <employee_id>".format(argv[0]))
-        exit(1)
+    # if len(argv) != 2 or not argv[1].isdigit():
+    #     print("Usage: {} <employee_id>".format(argv[0]))
+    #     exit(1)
 
     employee_id = int(argv[1])
     user_url = "https://jsonplaceholder.typicode.com/users/{}".format(
