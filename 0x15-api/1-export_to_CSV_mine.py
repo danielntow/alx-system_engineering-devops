@@ -27,8 +27,8 @@ if __name__ == "__main__":
 
         with open(csv_filename, mode='w', newline='') as csvfile:
             csv_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-            # csv_writer.writerow(
-            #     ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+            csv_writer.writerow(
+                ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
 
             for task in tasks_response:
                 csv_writer.writerow(
