@@ -1,49 +1,72 @@
 #!/usr/bin/python3
 """
-Recursive function to query the Reddit API and return a list
-containing the titles of all hot articles for a given subreddit.
-If no results are found, the function returns None.
+2-recurse
 """
 import requests
 
 
-def get_hot_titles(subreddit, hot_titles=[], after=''):
+def recurse(subreddit, hot_list=[], after=None):
     """
-    Recursive function to get titles of hot articles for a subreddit.
+    Recursively queries the Reddit API and returns a list containing
+    the titles of all hot articles for a given subreddit.
 
     Args:
         subreddit (str): The name of the subreddit.
-        hot_titles (list): List to store the titles of hot articles.
+        hot_list (list): The list to store the titles of hot articles.
         after (str): The parameter used for pagination in Reddit API.
 
     Returns:
-        list: The list containing the titles of hot articles,
-        or None if no results found.
+        list: The list containing the titles of hot articles, or
+        None if no results found.
     """
-    user_agent = {'user-agent': 'fake_user_agent'}
-    base_url = f'https://www.reddit.com/r/{subreddit}/hot.json?after={after}'
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
 
-    response = requests.get(base_url, headers=user_agent)
+    # Set a custom User-Agent to avoid Too Many Requests errors
+    headers = {"User-Agent": "my_custom_user_agent"}
 
-    posts_data = response.json().get('data', {}).get("children", [])
-    if not posts_data:
-        return hot_titles
+    # Include 'after' parameter if available
+    params = {'after': after} if after else {}
 
-    for post in posts_data:
-        hot_titles.append(post.get('data', {}).get('title'))
+    # Make a request to the Reddit API
+    response = requests.get(
+        url, headers=headers, params=params, allow_redirects=False)
 
-    next_after = response.json().get('data', {}).get('after', None)
-    if next_after is not None:
-        return get_hot_titles(subreddit, hot_titles, next_after)
+    # Check if the request was successful (status code 200)
+    if response.status_code == 200:
+        # Parse JSON response
+        data = response.json()
 
-    return hot_titles
+        # Extract the titles of hot articles and update the hot_list
+        posts = data["data"]["children"]
+        for post in posts:
+            hot_list.append(post["data"]["title"])
+
+        # Recursive call with the next 'after' parameter
+        next_after = data["data"]["after"]
+        if next_after:
+            recurse(subreddit, hot_list, after=next_after)
+
+        return hot_list
+
+    elif response.status_code == 302:
+        # Redirect indicates an invalid subreddit
+        return None
+
+    else:
+        # Print error message and return None
+        print(f"Error: {response.status_code}")
+        return None
 
 
 if __name__ == "__main__":
-    # Example usage
-    subreddit_name = "programming"
-    result = get_hot_titles(subreddit_name)
-    if result is not None:
-        print(result)
+    # Test the function with command-line arguments
+    import sys
+
+    if len(sys.argv) < 2:
+        print("Please pass an argument for the subreddit to search.")
     else:
-        print("No results found.")
+        result = recurse(sys.argv[1])
+        if result is not None:
+            print(len(result))
+        else:
+            print("None")
