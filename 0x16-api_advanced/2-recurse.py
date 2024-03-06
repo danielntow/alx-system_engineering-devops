@@ -57,6 +57,8 @@ def recurse(subreddit, hot_list=[], after=None):
         return None
 
 if __name__ == "__main__":
+
+
     # Test the function with command-line arguments
     import sys
 
