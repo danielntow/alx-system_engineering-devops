@@ -28,7 +28,8 @@ def recurse(subreddit, hot_list=[], after=None):
     params = {'after': after} if after else {}
 
     # Make a request to the Reddit API
-    response = requests.get(url, headers=headers, params=params, allow_redirects=False)
+    response = requests.get(
+    url, headers=headers, params=params, allow_redirects=False)
 
     # Check if the request was successful (status code 200)
     if response.status_code == 200:
