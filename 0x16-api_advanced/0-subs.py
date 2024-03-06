@@ -47,6 +47,7 @@ if __name__ == "__main__":
     # Test the function with command-line arguments
     import sys
 
+
     if len(sys.argv) < 2:
         print("Please pass an argument for the subreddit to search.")
     else:
