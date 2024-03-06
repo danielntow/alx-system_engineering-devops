@@ -4,6 +4,7 @@
 """
 import requests
 
+
 def number_of_subscribers(subreddit):
     """
     Queries the Reddit API and returns the
@@ -40,6 +41,7 @@ def number_of_subscribers(subreddit):
         # Print error message and return 0
         print(f"Error: {response.status_code}")
         return 0
+
 
 if __name__ == "__main__":
     # Test the function with command-line arguments
