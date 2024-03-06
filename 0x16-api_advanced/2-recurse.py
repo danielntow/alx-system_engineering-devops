@@ -4,6 +4,7 @@
 """
 import requests
 
+
 def recurse(subreddit, hot_list=[], after=None):
     """
     Recursively queries the Reddit API and returns a list containing the titles
@@ -58,6 +59,7 @@ def recurse(subreddit, hot_list=[], after=None):
         # Print error message and return None
         print(f"Error: {response.status_code}")
         return None
+
 
 if __name__ == "__main__":
     # Test the function with command-line arguments
